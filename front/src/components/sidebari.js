@@ -1,5 +1,5 @@
 import React, { useState, useEffect, } from "react";
-import Link from 'react-router-dom';
+import Link, { useNavigate } from 'react-router-dom';
 import { Sidebar, Menu, MenuItem } from 'react-pro-sidebar';
 
 const Sidebari = () => {
@@ -20,12 +20,13 @@ const Sidebari = () => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
+    const navigate = useNavigate();
 
  
 
     if (windowWidth > 400) {
         return (
-            <Sidebar className="min-h-[100vh] fixed   flex  my-auto " collapsed={collapsed} collapsedWidth="6rem">
+            <Sidebar className="min-h-[100vh]    flex  my-auto " collapsed={collapsed} width="10rem" collapsedWidth="6rem">
                 <div className="  min-h-[100vh] fixed ">
                 <div className=" py-2   text-center p-2 " onClick={() => setCollapsed(!collapsed)}>
                         <a className="min-w-full text-center oswald-medium p-2 text-white cursor-pointer h-full font-sans text-3xl align-middle">
@@ -47,9 +48,8 @@ const Sidebari = () => {
                     }
                 }}>
                     
-                    <MenuItem className="my-4 poppins">{collapsed ? <img className="m-auto" src="img/customer.png" /> : 'Fornecedores'}</MenuItem>
-                    <MenuItem className="my-4 poppins">{collapsed ? <img className="m-auto" src="img/box.png" /> : 'Produtos'}</MenuItem>
-                    <MenuItem className="my-4 poppins">{collapsed ? <img className="m-auto" src="img/report.png" /> : 'Historico'}</MenuItem>
+                    <MenuItem onClick={() => (navigate('/'))} className="my-4 poppins">{collapsed ? <img className="m-auto" src="img/customer.png" /> : 'Fornecedores'}</MenuItem>
+                    <MenuItem onClick={() => (navigate('/vendas'))} className="my-4 poppins">{collapsed ? <img className="m-auto" src="img/report.png" /> : 'Historico'}</MenuItem>
                 </Menu>
                 </div>
             </Sidebar>
@@ -59,9 +59,8 @@ const Sidebari = () => {
             <div style={{ display: 'flex', height: '100%', minHeight: '400px' }}>
                 <Sidebar className="bg-white" onBackdropClick={() => setToggled(false)} toggled={toggled} breakPoint="always">
                     <Menu className="h-full">
-                        <MenuItem className="text-black text-xl bold"> Fornecedores</MenuItem>
-                        <MenuItem className="text-black text-xl bold"> Produtos</MenuItem>
-                        <MenuItem className="text-black text-xl bold"> Historico</MenuItem>
+                        <MenuItem onClick={() => (navigate('/'))} className="text-black text-xl bold"> Fornecedores</MenuItem>
+                        <MenuItem onClick={() => (navigate('/vendas'))} className="text-black text-xl bold"> Historico</MenuItem>
                         
                     </Menu>
                 </Sidebar>

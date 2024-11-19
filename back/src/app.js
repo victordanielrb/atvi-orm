@@ -18,13 +18,21 @@ app.get('/fornecedores', async (req, res) => {
 app.get('/produtos/:id', async (req, res) => {
     const { id } = req.params;
     try {
-        const result = await prisma.produto.findMany({
-            where: {
-                forn_id: parseInt(id)
-            }
-        });
-        console.log(result);
-        return res.status(200).json(result);
+        if (id !== undefined) {
+            const result = await prisma.produto.findMany({
+                where: {
+                    forn_id: parseInt(id)
+                }
+            });
+            console.log(result);
+            return res.status(200).json(result);
+        }
+        else {
+            const result = await prisma.produto.findMany();
+            console.log(result);
+            return res.status(200).json(result);
+        }
+        
     } catch (e) {
         console.error("Error fetching fornecedor:", e.message);
         return res.status(500).json({ error: "Internal Server Error" });
@@ -47,6 +55,36 @@ app.post('/fornecedores', async (req, res) => {
         return res.status(500).json({ error: "Internal Server Error" });
     }
 })
+app.delete('/produtos/:id', async (req, res) => {
+    console.log('params',req.params);
+    
+    const  id  = req.params.id;
+    try {
+        
+        console.log(result);
+        return res.status(200).json(result);
+    } catch (e) {
+        console.error("Error deleting produto:", e.message);
+        return res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+app.delete('/fornecedores/:id', async (req, res) => {
+    console.log('params',req.params);
+    
+    const  id  = req.params.id;
+    try {
+        const result = await prisma.fornecedor.delete({
+            where: {
+                forn_id: parseInt(id)
+            }
+        });
+        console.log(result);
+        return res.status(200).json(result);
+    } catch (e) {
+        console.error("Error deleting fornecedor:", e.message);
+        return res.status(500).json({ error: "Internal Server Error" });
+    }
+});
 const port = 3001;
 app.listen(port, async () => {
     try {

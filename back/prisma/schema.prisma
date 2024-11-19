@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL") // Configure sua conexão aqui
+}
+
+model Fornecedor {
+  forn_id   Int         @id @default(autoincrement())
+  forn_nome String?     @db.VarChar(30)
+  produtos  Produto[] // Relacionamento 1:N com Produto
+  Historico Historico[]
+}
+
+model Produto {
+  prod_id    Int         @id @default(autoincrement())
+  prod_nome  String?     @db.VarChar(30)
+  prod_preco Float?
+  forn_id    Int?
+  fornecedor Fornecedor? @relation(fields: [forn_id], references: [forn_id])
+  historicos Historico[] // Relacionamento 1:N com Historico
+}
+
+model Historico {
+  hist_id    Int         @id @default(autoincrement())
+  hist_date  DateTime?
+  prod_id    Int?
+  forn_id    Int?
+  produto    Produto?    @relation(fields: [prod_id], references: [prod_id])
+  fornecedor Fornecedor? @relation(fields: [forn_id], references: [forn_id])
+}

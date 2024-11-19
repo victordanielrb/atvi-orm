@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+    body {
+        min-height: 100vh;
+        background: #1a2037 ;
+      }
+    .poppins {
+        font-family: 'Poppins', sans-serif;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Poppins', sans-serif;
+    }
+    
+.oswald-medium {
+  font-family: "Oswald", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+.ps-sidebar-container{
+    padding: 0px!important;
+    border: 0px!important;
+    margin: 0px!important;
+}
+.ps-menu-root{
+    padding: 0px!important;
+    border:  0px!important;
+    margin: 0px!important;
+    outline: 0ch!important;
+}
+.ps-menu-button {
+
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+    width: 100%!important;
+    max-width: 16rem!important;
+     
+   }
+  
+  
+  .ps-sidebar-container{
+    background-color: var(--alt-color)!important;
+   width: 100%!important;
+   max-width: 16rem!important;
+   
+  }
+  .ps-sidebar-root{
+    margin: 0!important;
+    padding: 0!important;
+    border: 0px!important; ;
+
+    min-height: 100vh;
+    
+    outline: 0!important;
+    height: max-content!important;
+    
+
+  }
+  
+  .ps-menu-button:hover {
+    
+    
+    transition: 0.2s;
+  }
+  .ps-menu-label-css
+  .ps-menu-button:hover #carrinho{
+    display: none;
+    }  
