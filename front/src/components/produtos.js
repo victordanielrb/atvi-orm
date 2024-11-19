@@ -1,5 +1,6 @@
 import React from "react";
 import api from "../services/api";
+
 export default function Produto({ produtos = [] }) {
      function deletarProduto(id) {
         api.delete(`/produtos/${id}`).then((response) => {

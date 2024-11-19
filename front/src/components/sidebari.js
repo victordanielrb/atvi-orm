@@ -48,24 +48,24 @@ const Sidebari = () => {
                     }
                 }}>
                     
-                    <MenuItem onClick={() => (navigate('/'))} className="my-4 poppins">{collapsed ? <img className="m-auto" src="img/customer.png" /> : 'Fornecedores'}</MenuItem>
-                    <MenuItem onClick={() => (navigate('/vendas'))} className="my-4 poppins">{collapsed ? <img className="m-auto" src="img/report.png" /> : 'Historico'}</MenuItem>
+                    <MenuItem onClick={() => (navigate('/'))} className="my-4 poppins">{collapsed ? <img className="m-auto" src="../img/customer.png" /> : 'Fornecedores'}</MenuItem>
+                    <MenuItem onClick={() => (navigate('/historico'))} className="my-4 poppins">{collapsed ? <img className="m-auto" src="../img/report.png" /> : 'Historico'}</MenuItem>
                 </Menu>
                 </div>
             </Sidebar>
         );
     } else {
         return (
-            <div style={{ display: 'flex', height: '100%', minHeight: '400px' }}>
+            <div style={{ display: 'flex', height: '100%', minHeight: '400px' }} className="fixed z-20 ">
                 <Sidebar className="bg-white" onBackdropClick={() => setToggled(false)} toggled={toggled} breakPoint="always">
                     <Menu className="h-full">
                         <MenuItem onClick={() => (navigate('/'))} className="text-black text-xl bold"> Fornecedores</MenuItem>
-                        <MenuItem onClick={() => (navigate('/vendas'))} className="text-black text-xl bold"> Historico</MenuItem>
+                        <MenuItem onClick={() => (navigate('/historico'))} className="text-black text-xl bold"> Historico</MenuItem>
                         
                     </Menu>
                 </Sidebar>
-                <button className="sb-button absolute z-10 bg-[#252e50] ; m-2 p-4" onClick={() => setToggled(!toggled)}>
-                    <img src="img/menu.png" alt="menu" />
+                <button className="sb-button fixed rounded-md  ; m-2 p-4" onClick={() => setToggled(!toggled)}>
+                    <img src="../img/menu.png" alt="menu" />
                 </button>
             </div>
         );

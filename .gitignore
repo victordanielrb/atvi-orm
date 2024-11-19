@@ -1,0 +1,15 @@
+# Ignorar arquivos de sistema
+.DS_Store
+Thumbs.db
+package-lock.json
+# Ignorar logs e arquivos temporários
+*.log
+*.tmp
+
+# Ignorar diretórios específicos
+node_modules/
+dist/
+build/
+
+# Ignorar configurações locais
+.env

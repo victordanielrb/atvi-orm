@@ -55,6 +55,28 @@ app.post('/fornecedores', async (req, res) => {
         return res.status(500).json({ error: "Internal Server Error" });
     }
 })
+app.post('/produtos', async (req, res) => {
+    console.log('req',req.body);
+    
+    const nome = req.body.name;
+    const preco = parseFloat(req.body.preco);
+    const forn_id = parseInt(req.body.forn_id);
+    try {
+        const result = await prisma.produto.create({
+            data: {
+                prod_nome: nome,
+                prod_preco: preco,
+                forn_id: forn_id
+                
+            }
+        });
+        console.log(result);
+        return res.status(200).json(result);
+    } catch (e) {
+        console.error("Error creating produto:", e.message);
+        return res.status(500).json({ error: "Internal Server Error" });
+    }
+})
 app.delete('/produtos/:id', async (req, res) => {
     console.log('params',req.params);
     
