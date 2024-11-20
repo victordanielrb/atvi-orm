@@ -27,7 +27,7 @@ const Sidebari = () => {
     if (windowWidth > 400) {
         return (
             <Sidebar className="min-h-[100vh]    flex  my-auto " collapsed={collapsed} width="10rem" collapsedWidth="6rem">
-                <div className="  min-h-[100vh] fixed ">
+                <div className="  min-h-[100vh] fixed border-r-4 border-[#252e50] ">
                 <div className=" py-2   text-center p-2 " onClick={() => setCollapsed(!collapsed)}>
                         <a className="min-w-full text-center oswald-medium p-2 text-white cursor-pointer h-full font-sans text-3xl align-middle">
                             ORM

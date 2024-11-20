@@ -3,8 +3,58 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 const app = express();
 var cors = require('cors');
+const { where } = require('sequelize');
 app.use(express.json());
 app.use(cors());
+app.post('/compra', async (req, res) => {
+    const { forn_id, prod_id } = req.body;
+    const date = new Date
+    const dia = date.getDate()
+    const mes = date.getMonth()+1
+    const ano = date.getFullYear()
+    console.log(forn_id,prod_id);
+    
+       
+
+    try {
+        const result = await prisma.historico.create({
+            data: {
+                forn_id: parseInt(forn_id),
+                prod_id: parseInt(prod_id),
+                hist_date: date.toISOString() 
+            }
+        });
+        console.log(result);
+        return res.status(200).json(result);
+    } catch (e) {
+        console.error("Error creating compra:", e.message);
+        return res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+app.get('/compra', async (req, res) => {
+    try {
+        const result = await prisma.$queryRaw`
+            SELECT 
+                hist_id, 
+                hist_date, 
+                fornecedor.forn_nome, 
+                produto.prod_nome
+            FROM 
+                historico
+            INNER JOIN 
+                fornecedor ON historico.forn_id = fornecedor.forn_id
+            INNER JOIN 
+                produto ON historico.prod_id = produto.prod_id
+            WHERE historico.forn_id IS NOT NULL AND historico.prod_id IS NOT NULL ORDER BY hist_date DESC;
+        `;
+        console.log('Resultado:', result);
+        return res.status(200).json(result);
+    } catch (e) {
+        console.error('Erro na consulta:', e);
+        return res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
 app.get('/fornecedores', async (req, res) => {
     try {
         const result = await prisma.fornecedor.findMany();
@@ -24,7 +74,7 @@ app.get('/produtos/:id', async (req, res) => {
                     forn_id: parseInt(id)
                 }
             });
-            console.log(result);
+            
             return res.status(200).json(result);
         }
         else {
@@ -70,7 +120,7 @@ app.post('/produtos', async (req, res) => {
                 
             }
         });
-        console.log(result);
+    
         return res.status(200).json(result);
     } catch (e) {
         console.error("Error creating produto:", e.message);
@@ -78,12 +128,15 @@ app.post('/produtos', async (req, res) => {
     }
 })
 app.delete('/produtos/:id', async (req, res) => {
-    console.log('params',req.params);
+    console.log('params',req.params.id);
     
-    const  id  = req.params.id;
+    const  id  = parseInt(req.params.id);
     try {
-        
-        console.log(result);
+        const result = await prisma.produto.delete({   
+            where: {
+                prod_id: parseInt(id)
+            }});
+        console.log('deletado',result);
         return res.status(200).json(result);
     } catch (e) {
         console.error("Error deleting produto:", e.message);
@@ -91,16 +144,16 @@ app.delete('/produtos/:id', async (req, res) => {
     }
 });
 app.delete('/fornecedores/:id', async (req, res) => {
-    console.log('params',req.params);
+    console.log('params',req.params.id);
     
     const  id  = req.params.id;
     try {
         const result = await prisma.fornecedor.delete({
             where: {
-                forn_id: parseInt(id)
+                prod_id: parseInt(id)
             }
         });
-        console.log(result);
+        
         return res.status(200).json(result);
     } catch (e) {
         console.error("Error deleting fornecedor:", e.message);

@@ -20,7 +20,7 @@ export default function CadProdutos() {
             const response = await api.post('http://localhost:3001/produtos', { name:nome ,preco:preco,forn_id:forn_id});
             console.log("Response:", response.data); 
             alert("Fornecedor cadastrado com sucesso!");
-            window.location.reload();
+            
         } catch (error) {
             console.error("Erro ao enviar:", error);
             alert("Erro ao cadastrar o fornecedor.");

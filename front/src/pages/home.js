@@ -8,7 +8,7 @@ export default function Home(){
            <Sidebari/>
            
 
-        <div className="flex border-l-4 border-[#252e50]  flex-col h-full w-full text-center justify-center  ">
+        <div className="flex  my-4  flex-col h-full w-full text-center justify-center  ">
                 <CadFornecedores/>
             <div className="my-16  m-4 bg-[#252e50] rounded  flex flex-col mx-auto ">
                     <div  className="flex m-4 rounded h-12 align-middle content-center cursor-default grid grid-cols-4 gap-4 justify-center ">
